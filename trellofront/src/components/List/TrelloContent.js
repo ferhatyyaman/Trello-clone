@@ -9,10 +9,10 @@ export default function TrelloContent({ veri }) {
       <Card className={styles.container}>
         <Typography>
           {veri.content}
-          
         </Typography>
 
       </Card>
     </div>
+    
   )
 }

@@ -8,4 +8,9 @@
 }
 .nav a{
     color: aliceblue;
+    flex-grow: 1;
+}
+.nav button{
+    color:#fff;
+    background-color: #000;
 }

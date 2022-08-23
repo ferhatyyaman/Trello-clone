@@ -13,7 +13,6 @@ def data():
             data.append(
                 {
                 "id":veri.id,
-                "title":veri.title,
                 "content":veri.content,
                 } 
             )
@@ -34,7 +33,7 @@ def dataId(id):
             return jsonify({"success": False, "message": "Product not found"})
 
         if request.method == "GET":
-            userObj = {"id":data.id,"title":data.title,"content":data.content}
+            userObj = {"id":data.id,"content":data.content}
             return jsonify({"success": True, "data":userObj})
 
         elif request.method == "DELETE":
@@ -42,15 +41,12 @@ def dataId(id):
             return jsonify({"success": True, "message":"deleted"})
 
         elif request.method == "PUT":
-            title=request.form.get("title")
             content=request.form.get("content")
 
-            if title == None:
-                title = data.name
             if content == None:
                 content = data.content
 
-            Data.update_data(id,title,content)
+            Data.update_data(id,content)
             return jsonify({"success": True, "message": "product updated"})
 
     except Exception as e:
@@ -61,15 +57,13 @@ def dataId(id):
 @apiData.route("/addData",methods=["POST"])
 def addData():
     try:
-        title=request.form.get("title")
-        content=request.form.get("content")
         
-        if title == None:
-            return jsonify({"success": False, "message": "title is required"})
+        content=request.form.get("content")
+       
         if content == None:
             return jsonify({"success": False, "message": "content is required"})
         
-        Data.add_data(title , content)
+        Data.add_data(content)
         return jsonify({"success": True, "message":"başarılı"})
 
     except Exception as e:

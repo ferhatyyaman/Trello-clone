@@ -1,0 +1,25 @@
+.drawer{
+    width:400px
+}
+.menu{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.box1{
+    width: 45%;
+    height: 90px;
+    background-image: url("https://img.freepik.com/free-vector/nature-scene-with-river-hills-forest-mountain-landscape-flat-cartoon-style-illustration_1150-37326.jpg?w=2000");
+    border-radius: 9px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box2{
+    width: 45%;
+    height: 90px;
+    border-radius: 9px;
+    background-image:url("https://htmlcolorcodes.com/assets/images/html-color-codes-color-palette-generators.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}

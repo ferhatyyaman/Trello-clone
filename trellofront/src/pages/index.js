@@ -1,13 +1,15 @@
+import { useState } from 'react'
 import Input from '../components/Input/Input'
 import TrelloCard from '../components/List/TrelloCard'
-import Nav from '../components/Nav'
+import Navigation from '../components/Nav/Navigation'
 import styles from '../styles/Home.module.css'
 
 export default function Home({veri}) {
   console.log(veri)
   return (
+    
     <>
-    <Nav/>
+    <Navigation/>
     <div className={styles.container}>
       <TrelloCard veri={veri} />
       <div className={styles.newlist}>
@@ -24,6 +26,7 @@ export default function Home({veri}) {
     })}
     
     </>
+   
   )
 }
 
@@ -36,6 +39,9 @@ export async function getServerSideProps(){
       }
   }
 }
+
+
+
 
 
   
