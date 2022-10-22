@@ -1,19 +1,21 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from api.data import apiData
-from api.dataTitle import apiDataTitle
+from api.contents import apiContents
+from api.title import apiTitle
 
 from trellodb import createApp
 from trellodb.initialize_db import createDB
+
 
 app=createApp()  
 CORS(app)
 createDB()
 
+app.config['SQLALCHEMY_ECHO'] = True
 
-app.register_blueprint(apiData)
-app.register_blueprint(apiDataTitle)
+app.register_blueprint(apiContents)
+app.register_blueprint(apiTitle)
 
 @app.route("/")
 def index():

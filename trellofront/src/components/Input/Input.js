@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import styles from "../../styles/Input.module.css"
 import InputContent from './InputContent'
 
-export default function Input({type}) {
+export default function Input({type,veri,veriTitle,titleId}) {
   
 
   const [open, setOpen] = useState(false);
@@ -11,7 +11,7 @@ export default function Input({type}) {
   return (
     <div className={styles.container}>
       <Collapse in={open}>
-        <InputContent setOpen={setOpen} type={type}/> 
+        <InputContent setOpen={setOpen} veri={veri} type={type} veriTitle={veriTitle} titleId={titleId}/> 
       </Collapse>
 
       <Collapse in={!open}>
@@ -19,10 +19,7 @@ export default function Input({type}) {
             <Typography>{type==="card"?"+ Add a Card":"Add a list"}</Typography>
         </div>
       </Collapse>
-
-     
-     
-        
+      
     </div>
   )
 }

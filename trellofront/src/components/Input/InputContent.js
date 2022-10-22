@@ -1,46 +1,61 @@
-import { Button, IconButton, InputBase} from '@mui/material'
+import { Button, IconButton, InputBase, List} from '@mui/material'
 import React,{Component, useContext, useState} from 'react'
 import styles from "../../styles/InputContent.module.css"
+import {v4 as uuid} from "uuid"
 
-export default function InputContent({setOpen,type}) {
+export default function InputContent({setOpen,type,veri,veriTitle,titleId}) {
 
-const [cardTitle,setCardTitle]=useState('');
+const [data ,setData]=useState("");
+const [title ,setTitle]=useState("");
 
+const addMoreCard=(title,titleId)=>{
+  const newCardId=uuid()
+  const newCard={
+    id:newCardId,
+    title
+  }
+}
 
   const handleOnChange=(e)=>{
-    setCardTitle(e.target.value);
+    setData(e.target.value);  
+    setTitle(e.target.value); 
+  }
     
-}
-  const handleBtnConfirm=(e)=>{
-    e.preventDefault();
-    console.log(cardTitle)
-    if(type==="card"){
+  const submitHandler=()=>{
+    addMoreCard(title,titleId)
 
-    
-    fetch('http://localhost:5000/api/data/addData', {
-        Method: 'POST',
-        Headers: {
-          Accept: 'application.json',
-          'Content-Type': 'application/json'
-        },
-        Cache: 'default'
-      })
-        .then(json => alert(JSON.stringify(json)))
+    if(type==='card'){
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({name:data})
+      };
+      fetch(`http://127.0.0.1:5000/api/contents/addContent`, requestOptions)
+          .then(response => response.json())
+          .then(data => setData(data));
+          console.log(data)
+          
+        setOpen(false)}
+    else{
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({title:title})
+    };
+    fetch(`http://127.0.0.1:5000/api/title/addTitle`, requestOptions)
+        .then(response => response.json())
+        .then( title => setTitle(title));
+        console.log(title)
 
-    setOpen(false)
     }
-  };
-     
-  
-
-
+};
   return (
     <div >
         <div className={styles.container}>
-            <InputBase onChange={handleOnChange} value={cardTitle} multiline fullWidth placeholder={type ==='card'?'Enter a title of this card...':"Enter list title"}/>
+            <InputBase onChange={(e)=> handleOnChange(e)} value={title} multiline fullWidth placeholder={type ==='card'?'Enter a title of this card...':"Enter list title"}/>
         </div>
         <div className={styles.btn}>
-            <Button className={styles.add} onClick={handleBtnConfirm}>{type === "card" ?"add Card":"add list"}</Button>
+            <Button className={styles.add} onClick={(e)=>submitHandler(e)}>{type === "card" ?"add Card":"add list"}</Button>
             <Button className={styles.close} onClick={()=>setOpen(false)}>x</Button>
         </div>
         

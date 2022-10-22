@@ -4,41 +4,52 @@ import TrelloCard from '../components/List/TrelloCard'
 import Navigation from '../components/Nav/Navigation'
 import styles from '../styles/Home.module.css'
 
-export default function Home({veri}) {
-  console.log(veri)
+export default function Home({veri,veriTitle}) {
+  console.log(veri,veriTitle)
+ 
   return (
     
     <>
     <Navigation/>
     <div className={styles.container}>
-      <TrelloCard veri={veri} />
+      <TrelloCard veri={veri} veriTitle={veriTitle}/>
+
       <div className={styles.newlist}>
-      <Input/>
+      <Input key={veri.id} veri={veri} veriTitle={veriTitle}/>
       </div>
     </div>
 
-    {veri.data.map((veri)=>{
+    {/* {veri.data.map((veri)=>{
       return(
         <div key={veri.id}>
-          <h1>{veri.title}</h1>
+          
         </div>
       )
-    })}
+    })} */}
     
     </>
    
   )
 }
 
-export async function getServerSideProps(){
-  const veri = await fetch(`http://127.0.0.1:5000/api/data`)
-  .then(res=>res.json());
-  return{
-      props: {
-          veri
+      export async function getServerSideProps(){
+        const [veriRes,veriTitleRes] = await Promise.all([
+          fetch(`http://127.0.0.1:5000/api/contents`),
+          fetch(`http://127.0.0.1:5000/api/title`)
+        ]) ;
+
+        const [veri, veriTitle] = await Promise.all([
+          veriRes.json(), 
+          veriTitleRes.json()
+        ]);
+        return{
+            props: {
+                veri,
+                veriTitle
+            }
+
+        }
       }
-  }
-}
 
 
 

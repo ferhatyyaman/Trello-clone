@@ -2,7 +2,7 @@
   "name": "trellofront",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,10 +13,12 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/material": "^5.9.3",
+    "axios": "^0.27.2",
     "next": "12.2.3",
     "react": "18.2.0",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "18.2.0",
-    "react-beautiful-dnd": "^13.1.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "8.21.0",

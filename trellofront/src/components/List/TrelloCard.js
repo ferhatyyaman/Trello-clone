@@ -4,13 +4,15 @@ import TrelloContent from './TrelloContent'
 import Link from 'next/link';
 import Input from '../Input/Input';
 import Title from './Title';
+import { Paper } from '@mui/material';
 
 
-export default function TrelloCard({veri}) {
+export default function TrelloCard({veri,veriTitle}) {
   return (
     <>
-     <div className={styles.container}>
-       <Title key={veri.id} veri={veri}/>
+     <Paper className={styles.container}>
+    
+     <Title veriTitle={veriTitle} titleId={veriTitle.id}/>
 
        {veri.data.map((veri,index) => {
                             return (
@@ -18,8 +20,8 @@ export default function TrelloCard({veri}) {
                             )
           })}
         
-        <Input type="card"/>            
-    </div>
+        <Input type="card" titleId={veriTitle.id}/>            
+    </Paper>
     </>
    
   )
