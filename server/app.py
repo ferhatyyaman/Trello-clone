@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from api.contents import apiContents
-from api.title import apiTitle
+from api.cards import apiCards
+from api.tasks import apiTasks
 
 from trellodb import createApp
 from trellodb.initialize_db import createDB
@@ -14,8 +14,9 @@ createDB()
 
 app.config['SQLALCHEMY_ECHO'] = True
 
-app.register_blueprint(apiContents)
-app.register_blueprint(apiTitle)
+app.register_blueprint(apiCards)
+app.register_blueprint(apiTasks)
+
 
 @app.route("/")
 def index():
